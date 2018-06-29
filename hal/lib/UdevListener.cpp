@@ -1,7 +1,19 @@
 #include <UdevListener.h>
+#include <stdexcept>
 
 UdevListener::UdevListener () 
-{}
+{
+	this->udev = udev_new();
+	if (!this->udev)
+		throw std::runtime_error("Cannot create udev context!");
+}
+
+UdevListener::~UdevListener () 
+{
+	udev_monitor_unref(mon);
+	udev_device_unref(dev);
+	udev_unref(udev);
+}
 
 void UdevListener::setSubSystem(char *subsystemName) 
 {
@@ -10,14 +22,19 @@ void UdevListener::setSubSystem(char *subsystemName)
 
 struct udev_device * UdevListener::startListening() 
 {
-	int fp;
+	int fd;
 	fd_set fds;
 	struct timeval tv;
 	int ret;
 	
+	/* clear */
+	if (dev) {
+		udev_monitor_unref(mon);
+		udev_device_unref(dev);
+	}
 
 	/* subscribe to subsystem */
-	mon = udev_monitor_new_from_netlink(udev, "udev");
+	mon = udev_monitor_new_from_netlink(udev, "kernel");
 	udev_monitor_filter_add_match_subsystem_devtype(mon, 
 		subsystem, NULL);
 	udev_monitor_enable_receiving(mon);
@@ -47,4 +64,9 @@ struct udev_device * UdevListener::startListening()
 		usleep(250*1000);
 		fflush(stdout);
 	}
+}
+
+const char* UdevListener::getDeviceName () 
+{
+	return udev_device_get_sysname(dev);
 }

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <libudev.h>
+#include <unistd.h>
 
 class UdevListener {
 	char* subsystem;
@@ -11,8 +12,10 @@ class UdevListener {
 	struct udev_monitor *mon;
 public:
 	UdevListener ();
+	~UdevListener ();
 	void setSubSystem (char *);
 	struct udev_device *startListening ();
+	const char* getDeviceName();
 };
 
 #endif
