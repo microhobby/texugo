@@ -6,8 +6,15 @@ FuelGauge::FuelGauge ()
 	if (!this->udev)
 		throw std::runtime_error("Cannot create udev context!");
 
+	this->setDeviceName((char*)"battery");
 	/* get device */
-	this->dev = udev_device_new_from_syspath(udev, this->FUEL_GAUGE_SYSPATH);
+	this->dev = udev_device_new_from_syspath(udev, deviceName);
+}
+
+FuelGauge::~FuelGauge () 
+{
+	udev_device_unref(dev);
+	udev_unref(udev);
 }
 
 int FuelGauge::getStateOfCharge ()
@@ -30,4 +37,15 @@ void FuelGauge::setUdevDevice (struct udev_device *device)
 {
 	udev_device_unref(this->dev);
 	this->dev = device;
+	printf("I: DEVNODE=%s\n", udev_device_get_devnode(dev));
+	printf("I: KERNEL=%s\n", udev_device_get_sysname(dev));
+	printf("I: DEVPATH=%s\n", udev_device_get_devpath(dev));
+	printf("I: DEVTYPE=%s\n", udev_device_get_devtype(dev));
+}
+
+void FuelGauge::setDeviceName (char* name)
+{
+	sprintf(deviceName, "%s%s/", this->FUEL_GAUGE_SYSPATH, name);
+	printf("Dev fs: %s\n", this->deviceName);
+	this->dev = udev_device_new_from_syspath(udev, deviceName);
 }
