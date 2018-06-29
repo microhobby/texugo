@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 	/* declare */
 	udev_device * dev;
 	char subsys[] = "power_supply";
-	char dev_name[] = "BAT1";
+	char dev_name[] = "battery";
 	UdevListener* udev = new UdevListener();
 	FuelGauge* gauge = new FuelGauge();
 
