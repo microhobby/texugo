@@ -23,5 +23,5 @@ float FuelGauge::getVoltageNow ()
 	this->voltage = 
 		atoi(udev_device_get_sysattr_value(this->dev, "voltage_now"));
 
-	return this->voltage / 100f;
+	return this->voltage / 100.0f;
 }
