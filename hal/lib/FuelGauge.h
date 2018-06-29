@@ -16,6 +16,7 @@ public:
 	FuelGauge ();
 	int getStateOfCharge ();
 	float getVoltageNow ();
+	void setUdevDevice (struct udev_device *);
 };
 
 #endif

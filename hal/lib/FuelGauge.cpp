@@ -25,3 +25,9 @@ float FuelGauge::getVoltageNow ()
 
 	return this->voltage / 100.0f;
 }
+
+void FuelGauge::setUdevDevice (struct udev_device *device) 
+{
+	udev_device_unref(this->dev);
+	this->dev = device;
+}
