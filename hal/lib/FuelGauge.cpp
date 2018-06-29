@@ -2,7 +2,7 @@
 
 FuelGauge::FuelGauge () 
 {
-	this->udev = udev_new(this->FUEL_GAUGE_SYSPATH);
+	this->udev = udev_new();
 	if (!this->udev)
 		throw std::runtime_error("Cannot create udev context!");
 
