@@ -1,5 +1,3 @@
-CXX=arm-linux-gnueabihf-g++
-
 fuel-gauge:
 	$(CXX) -g -o -Wall -Ilib lib/FuelGauge.cpp
 
