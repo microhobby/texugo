@@ -37,10 +37,6 @@ void FuelGauge::setUdevDevice (struct udev_device *device)
 {
 	udev_device_unref(this->dev);
 	this->dev = device;
-	printf("I: DEVNODE=%s\n", udev_device_get_devnode(dev));
-	printf("I: KERNEL=%s\n", udev_device_get_sysname(dev));
-	printf("I: DEVPATH=%s\n", udev_device_get_devpath(dev));
-	printf("I: DEVTYPE=%s\n", udev_device_get_devtype(dev));
 }
 
 void FuelGauge::setDeviceName (char* name)
