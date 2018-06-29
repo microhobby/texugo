@@ -8,7 +8,7 @@
 class FuelGauge {
 	int soc;
 	float voltage;
-	static const char FUEL_GAUGE_SYSPATH[] = 
+	static char const FUEL_GAUGE_SYSPATH[] = 
 		"/sys/class/power_supply/battery";
 	struct udev *udev;
 	struct udev_device *dev;
