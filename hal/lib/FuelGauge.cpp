@@ -10,14 +10,14 @@ FuelGauge::FuelGauge ()
 	this->dev = udev_device_new_from_syspath(udev, this->FUEL_GAUGE_SYSPATH);
 }
 
-FuelGauge::getStateOfCharge ()
+int FuelGauge::getStateOfCharge ()
 {
 	/* get capacity attr */
 	this->soc = atoi(udev_device_get_sysattr_value(this->dev, "capacity"));
 	return this->soc;
 }
 
-FuelGauge::getVoltageNow ()
+float FuelGauge::getVoltageNow ()
 {
 	/* get voltage_now attr */
 	this->voltage = 

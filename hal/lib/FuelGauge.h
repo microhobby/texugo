@@ -15,7 +15,7 @@ class FuelGauge {
 public:
 	FuelGauge ();
 	int getStateOfCharge ();
-	int getVoltageNow ();
+	float getVoltageNow ();
 };
 
 #endif
