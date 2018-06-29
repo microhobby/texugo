@@ -1,8 +1,5 @@
 fuel-gauge:
-	$(CXX) -g -o -Wall -Ilib lib/FuelGauge.cpp
+	$(CXX) -g -o texugo-app -ludev -Ilib lib/FuelGauge.cpp texugo-app.cpp
 
-texugo-app:
-	$(CXX)-g -o texugo-app.c
-
-texugo-userspace:
-	$(CXX) -g -o texugo-app texugo-app.o FuelGauge.o
+clean:
+	rm texugo-app
