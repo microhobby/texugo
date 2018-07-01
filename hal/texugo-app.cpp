@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 		if (strcmp(udev->getDeviceName(), dev_name) == 0) {
 			gauge->setUdevDevice(dev);
-			printf("Stage of Charge: %d%\n",
+			printf("State of Charge: %d%\n",
 				gauge->getStateOfCharge());
 		}
 	}
