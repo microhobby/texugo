@@ -12,5 +12,4 @@ compile:
 	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND)
 
 clean:
-	rm texugo-app
-	rm core
+	rm $(APP_BATT) $(APP_SOUND)
