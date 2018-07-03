@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 
 			/* send data for cloud */
 			snprintf(wget_url, sizeof(wget_url),
-			"wget -O/dev/null -q \"http://%s/raspi_server/battery/%sSOC=%d&Volt=%f\"",
-			"192.168.0.11", "set.php?", 
+			"wget -O/dev/null -q \"http://%s/iot/battery/%sSOC=%d&Volt=%f\"",
+			SERVER_IP, "set.php?", 
 				gauge->getStateOfCharge(),
 				gauge->getVoltageNow());
 			printf("%s\n", wget_url);
