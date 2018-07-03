@@ -30,7 +30,7 @@ float FuelGauge::getVoltageNow ()
 	this->voltage = 
 		atoi(udev_device_get_sysattr_value(this->dev, "voltage_now"));
 
-	return this->voltage / 100.0f;
+	return this->voltage / VOLTAGE_PRECISION;
 }
 
 void FuelGauge::setUdevDevice (struct udev_device *device) 

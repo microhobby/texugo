@@ -1,6 +1,7 @@
 #ifndef __HEADER_FUELGAUGE__
 #define __HEADER_FUELGAUGE__
 
+#include <main_defconfig.h>
 #include <stdio.h>
 #include <libudev.h>
 #include <stdexcept>

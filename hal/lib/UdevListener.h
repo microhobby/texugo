@@ -1,6 +1,7 @@
 #ifndef __HEADER_UDEV_LISTENER__
 #define __HEADER_UDEV_LISTENER__
 
+#include <main_defconfig.h>
 #include <stdio.h>
 #include <libudev.h>
 #include <unistd.h>
