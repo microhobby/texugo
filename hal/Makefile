@@ -11,5 +11,10 @@ compile:
 	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT)
 	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND)
 
+debug:
+	ulimit -c unlimited
+	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT) -DDEBUG
+	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND) -DDEBUG
+
 clean:
 	rm $(APP_BATT) $(APP_SOUND)
