@@ -34,7 +34,7 @@ struct udev_device * UdevListener::startListening()
 	}
 
 	/* subscribe to subsystem */
-	mon = udev_monitor_new_from_netlink(udev, "udev");
+	mon = udev_monitor_new_from_netlink(udev, "kernel");
 	udev_monitor_filter_add_match_subsystem_devtype(mon, 
 		subsystem, NULL);
 	udev_monitor_enable_receiving(mon);
