@@ -30,12 +30,14 @@ int main(int argc, char *argv[])
 		if (strcmp(udev->getDeviceName(), dev_name) == 0) {
 			/* set uevent object */
 			gauge->setUdevDevice(dev);
-
+	
+#ifdef DEBUG
 			/* print battery level and voltage now */
 			printf("State of Charge: %d%\n",
 				gauge->getStateOfCharge());
 			printf("Battery Voltage: %f\n", 
 				gauge->getVoltageNow());
+#endif
 
 			/* send data for cloud */
 			snprintf(wget_url, sizeof(wget_url),
@@ -43,7 +45,11 @@ int main(int argc, char *argv[])
 			SERVER_IP, "set.php?", 
 				gauge->getStateOfCharge(),
 				gauge->getVoltageNow());
+
+#ifdef DEBUG
 			printf("%s\n", wget_url);
+#endif
+
 			system(wget_url);
 		}
 	}
