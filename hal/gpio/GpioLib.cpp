@@ -9,6 +9,9 @@ GPIOLib::GPIOLib (int pin, GPIOLib::direction direction, const char* label)
 	this->gpio_pin = pin;
 	this->gpio_direction = direction;
 	this->gpio_label = (char*)label;
+
+	/* request the pin*/
+	this->buildRequestData();
 }
 
 void GPIOLib::buildRequestData () 
@@ -31,9 +34,6 @@ int GPIOLib::getValue ()
 	struct gpiohandle_data data;
 	int ret;
 
-	/* build req data */
-	this->buildRequestData();
-
 	/* request value */
 	ret = ioctl(gpio_req.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &data);
 
@@ -48,9 +48,6 @@ void GPIOLib::setValue (int val)
 {
 	struct gpiohandle_data data;
 	int ret;
-
-	/* build req data */
-	this->buildRequestData();
 
 	/* set value */
 	data.values[0] = val;
