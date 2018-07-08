@@ -11,30 +11,31 @@ GPIOLib::GPIOLib (int pin, GPIOLib::direction direction, const char* label)
 	this->gpio_label = (char*)label;
 }
 
-void GPIOLib::buildRequestData (struct gpiohandle_request * req) 
+void GPIOLib::buildRequestData () 
 {
 	/* build req data */
-	req->lineoffsets[0] = this->gpio_pin;
-	req->lines = 1;
+	gpio_req.lineoffsets[0] = this->gpio_pin;
+	gpio_req.lines = 1;
 	if (this->gpio_direction == GPIOLib::direction::OUTPUT)
-		req->flags = GPIOHANDLE_REQUEST_OUTPUT;
+		gpio_req.flags = GPIOHANDLE_REQUEST_OUTPUT;
 	else
-		req->flags = GPIOHANDLE_REQUEST_INPUT;
-	strcpy(req->consumer_label, this->gpio_label);
+		gpio_req.flags = GPIOHANDLE_REQUEST_INPUT;
+	strcpy(gpio_req.consumer_label, this->gpio_label);
+
+	/* request and store */
+	handle_desc = ioctl(this->gpio_desc, GPIO_GET_LINEHANDLE_IOCTL, &gpio_req);
 }
 
 int GPIOLib::getValue () 
 {
 	struct gpiohandle_data data;
-	struct gpiohandle_request req;
-	int handle_desc, ret;
+	int ret;
 
 	/* build req data */
-	this->buildRequestData(&req);
+	this->buildRequestData();
 
 	/* request value */
-	handle_desc = ioctl(this->gpio_desc, GPIO_GET_LINEHANDLE_IOCTL, &req);
-	ret = ioctl(req.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &data);
+	ret = ioctl(gpio_req.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &data);
 
 	if (ret) {
 		printf("Error trying to request pin %d err %d\n", gpio_pin, ret);
@@ -46,16 +47,14 @@ int GPIOLib::getValue ()
 void GPIOLib::setValue (int val)
 {
 	struct gpiohandle_data data;
-	struct gpiohandle_request req;
-	int handle_desc, ret;
+	int ret;
 
 	/* build req data */
-	this->buildRequestData(&req);
+	this->buildRequestData();
 
 	/* set value */
-	handle_desc = ioctl(this->gpio_desc, GPIO_GET_LINEHANDLE_IOCTL, &req);
 	data.values[0] = val;
-	ret = ioctl(req.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &data);
+	ret = ioctl(gpio_req.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &data);
 
 	if (ret) {
 		printf("Error trying to request pin %d err %d\n", gpio_pin, ret);
