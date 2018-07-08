@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 		gpio->setValue(1);
 		sleep(1);
 		gpio->setValue(0);
+		sleep(1);
 	}
 
 	return 0;
