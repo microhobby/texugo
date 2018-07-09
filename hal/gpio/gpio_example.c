@@ -31,6 +31,7 @@ int main (int argc, char *argv[])
 		sleep(1);
 		data.values[0] = 0;
 		ret = ioctl(req.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &data);
+		sleep(1);
 	}
 
 	return 0;
