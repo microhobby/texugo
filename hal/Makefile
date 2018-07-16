@@ -7,6 +7,7 @@ MAIN_GPIO	= texugo-gpio-app.cpp
 APP_GPIO	= texugo-gpio-test
 LIBS 		= -ludev -Ilib -Igpio
 FILES_LIB 	= lib/FuelGauge.cpp lib/UdevListener.cpp gpio/GpioLib.cpp
+ARGS		= -DDEBUG
 
 compile:
 	ulimit -c unlimited
@@ -15,8 +16,8 @@ compile:
 
 debug:
 	ulimit -c unlimited
-	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT) -DDEBUG
-	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND) -DDEBUG
+	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT) $(ARGS)
+	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND) $(ARGS)
 
 tests:
 	ulimit -c unlimited
