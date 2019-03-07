@@ -9,6 +9,12 @@ LIBS 		= -ludev -Ilib -Igpio
 FILES_LIB 	= lib/FuelGauge.cpp lib/UdevListener.cpp gpio/GpioLib.cpp
 ARGS		= -DDEBUG
 
+all:
+	$(MAKE) compile
+	$(MAKE) tests
+	$(MAKE) example
+	$(MAKE) consumer
+
 compile:
 	ulimit -c unlimited
 	$(CXX) $(CFLAGS) $(APP_BATT) $(FILES_LIB) $(MAIN_BATT) $(LIBS)
@@ -28,8 +34,8 @@ example:
 	$(CXX) $(CFLAGS) example $(FILES_LIB) gpio/gpio_example.c $(LIBS)
 
 consumer:
-
+	ulimit -c unlimited
+	$(CXX) $(CFLAGS) consumer $(FILES_LIB) gpio/gpio_consumer.c $(LIBS)
 
 clean:
 	rm $(APP_BATT) $(APP_SOUND) $(APP_GPIO) example consumer
-
