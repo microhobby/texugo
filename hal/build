@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# run make on container to cross
+docker run -it -v $(pwd):/project --rm matheuscastello/build $@
+
+# send executable to board
+# NOTE please export BOARD_IP in terminal
+if [ "$BOARD_IP" != "" ]; then
+	# copy to ip
+	scp texugo-gpio-test example consumer root@$BOARD_IP:/home/root
+fi

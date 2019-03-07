@@ -23,8 +23,13 @@ tests:
 	ulimit -c unlimited
 	$(CXX) $(CFLAGS) $(APP_GPIO) $(FILES_LIB) $(MAIN_GPIO) $(LIBS)
 
-clean:
-	rm $(APP_BATT) $(APP_SOUND)
+example:
+	ulimit -c unlimited
+	$(CXX) $(CFLAGS) example $(FILES_LIB) gpio/gpio_example.c $(LIBS)
 
-clean-tests:
-	rm $(APP_GPIO)
+consumer:
+
+
+clean:
+	rm $(APP_BATT) $(APP_SOUND) $(APP_GPIO) example consumer
+
