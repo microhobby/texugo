@@ -11,17 +11,17 @@ ARGS		= -DDEBUG
 
 compile:
 	ulimit -c unlimited
-	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT)
-	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND)
+	$(CXX) $(CFLAGS) $(APP_BATT) $(FILES_LIB) $(MAIN_BATT) $(LIBS)
+	$(CXX) $(CFLAGS) $(APP_SOUND) $(FILES_LIB) $(MAIN_SOUND) $(LIBS)
 
 debug:
 	ulimit -c unlimited
-	$(CXX) $(CFLAGS) $(APP_BATT) $(LIBS) $(FILES_LIB) $(MAIN_BATT) $(ARGS)
-	$(CXX) $(CFLAGS) $(APP_SOUND) $(LIBS) $(FILES_LIB) $(MAIN_SOUND) $(ARGS)
+	$(CXX) $(CFLAGS) $(APP_BATT) $(FILES_LIB) $(MAIN_BATT) $(ARGS) $(LIBS)
+	$(CXX) $(CFLAGS) $(APP_SOUND) $(FILES_LIB) $(MAIN_SOUND) $(ARGS) $(LIBS)
 
 tests:
 	ulimit -c unlimited
-	$(CXX) $(CFLAGS) $(APP_GPIO) $(LIBS) $(FILES_LIB) $(MAIN_GPIO)
+	$(CXX) $(CFLAGS) $(APP_GPIO) $(FILES_LIB) $(MAIN_GPIO) $(LIBS)
 
 clean:
 	rm $(APP_BATT) $(APP_SOUND)
