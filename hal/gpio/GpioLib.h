@@ -14,7 +14,7 @@ public:
 		OUTPUT
 	};
 
-	GPIOLib (int pin, GPIOLib::direction direction, const char * label);
+	GPIOLib (int gpiochip, int pin, GPIOLib::direction direction, const char * label);
 	int getValue ();
 	void setValue (int val);
 private:

@@ -1,10 +1,12 @@
 
 #include <GpioLib.h>
 
-GPIOLib::GPIOLib (int pin, GPIOLib::direction direction, const char* label) 
+GPIOLib::GPIOLib (int gpiochip, int pin, GPIOLib::direction direction, const char* label) 
 {
 	/* open char device */
-	this->gpio_desc = open("/dev/gpiochip0", 0);
+	char devchip[25];
+	sprintf(devchip, "/dev/gpiochip%d", gpiochip);
+	this->gpio_desc = open(devchip, 0);
 	/* store pin line */
 	this->gpio_pin = pin;
 	this->gpio_direction = direction;

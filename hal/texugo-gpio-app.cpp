@@ -9,18 +9,19 @@ int main(int argc, char *argv[])
 {
 	/* declare */
 	GPIOLib * gpio;
-	int pin;
+	int pin, chip;
 
-	if (argc > 1) {
-		pin = atoi(argv[1]);
-		printf("We are try request pin %d\n", pin);
+	if (argc > 2) {
+		chip = atoi(argv[1]);
+		pin = atoi(argv[2]);
+		printf("We are try request pin gpiochip%d %d\n", chip, pin);
 	} else {
-		printf("No pin argument %d\n", - EINVAL);
+		printf("No pin or gpiochip argument %d\n", - EINVAL);
 		return - EINVAL;
 	}
 
 	/* instantiate */
-	gpio = new GPIOLib(pin, GPIOLib::direction::OUTPUT, "test");
+	gpio = new GPIOLib(chip, pin, GPIOLib::direction::OUTPUT, "test");
 
 	/* blink forever */
 	while (1) {
