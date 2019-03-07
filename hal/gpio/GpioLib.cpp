@@ -29,6 +29,10 @@ void GPIOLib::buildRequestData ()
 
 	/* request and store */
 	handle_desc = ioctl(this->gpio_desc, GPIO_GET_LINEHANDLE_IOCTL, &gpio_req);
+
+	if (handle_desc == -1) {
+		printf("Error trying to request pin %d err %s\n", gpio_pin, strerror(errno));
+	}
 }
 
 int GPIOLib::getValue () 
@@ -39,8 +43,9 @@ int GPIOLib::getValue ()
 	/* request value */
 	ret = ioctl(gpio_req.fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &data);
 
-	if (ret) {
-		printf("Error trying to request pin %d err %d\n", gpio_pin, ret);
+	if (ret == -1) {
+		printf("Error trying to request pin %d err %s\n", 
+			gpio_pin, strerror(errno));
 	}
 
 	return data.values[0];
@@ -55,7 +60,8 @@ void GPIOLib::setValue (int val)
 	data.values[0] = val;
 	ret = ioctl(gpio_req.fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &data);
 
-	if (ret) {
-		printf("Error trying to request pin %d err %d\n", gpio_pin, ret);
+	if (ret == -1) {
+		printf("Error trying to request pin %d err %s\n", 
+			gpio_pin, strerror(errno));
 	}
 }
