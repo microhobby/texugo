@@ -31,7 +31,7 @@ void GPIOLib::buildRequestData ()
 	handle_desc = ioctl(this->gpio_desc, GPIO_GET_LINEHANDLE_IOCTL, &gpio_req);
 
 	if (handle_desc == -1) {
-		printf("Error trying to request pin %d err %s\n", gpio_pin, strerror(errno));
+		printf("Error trying to request pin %d::%d err %s\n", gpio_pin, errno, strerror(errno));
 	}
 }
 
