@@ -28,6 +28,7 @@ int main (int argc, char *argv[])
 	/* request by ioctl */
 	handle_fd = ioctl(fd, GPIO_GET_LINEHANDLE_IOCTL, &req);
 	printf("Handle request :: %d\n", handle_fd);
+	printf("const int GPIO_GET_LINEHANDLE_IOCTL = %lu;\n", GPIO_GET_LINEHANDLE_IOCTL);
 
 	if (handle_fd == -1) {
 		printf("ioctl failed and returned errno %s \n", 
